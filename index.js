@@ -4,21 +4,15 @@ var path = require('path');
 
 module.exports = {
   rules: {
-    'no-js': function(context) {
+    'filenames-according-to-folder': function(context) {
       return {
         Program: function(node) {
-          if (path.extname(context.getFilename()) === '.js') {
-            context.report(node, 'You are attempting to use JavaScript. U MAD?');
+          if (context.getFilename()) {
+            context.report(node, `Your path is ${context.getFilename()}`);
           }
-        },
-      };
-    },
-    'no-jsx': function(context) {
-      return {
-        Program: function(node) {
-          if (path.extname(context.getFilename()) === '.jsx') {
-            context.report(node, 'You are attempting to use JSX. This is strictly prohibited.');
-          }
+          // if (path.extname(context.getFilename()) === '.js') {
+          //   context.report(node, `Your path is ${}`);
+          // }
         },
       };
     },

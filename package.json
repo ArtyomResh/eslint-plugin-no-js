@@ -1,24 +1,25 @@
 {
-  "name": "eslint-plugin-no-js",
-  "version": "0.2.0",
-  "description": "ESLint plugin to disable JavaScript.",
+  "name": "eslint-plugin-filenames-at-folder",
+  "version": "0.0.0",
+  "description": "Force to name files according to folder name.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/chicoxyzzy/eslint-plugin-no-js"
+    "url": "https://github.com/ArtyomResh/eslint-plugin-no-js"
   },
   "keywords": [
     "eslint",
     "eslintplugin",
-    "no-js",
-    "no-jsx"
+    "eslint-plugin",
+    "filenames",
+    "folder name",
   ],
-  "author": "Sergey Rubanov",
-  "license": "WTFPL",
+  "author": "Artyom Resh",
+  "license": "ISC",
   "peerDependencies": {
-    "eslint": ">=0.8.0"
+    "eslint": ">=0.10.0"
   }
 }

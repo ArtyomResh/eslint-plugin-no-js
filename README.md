@@ -1,20 +1,16 @@
 # eslint-plugin-no-js
 
-This is an ESLint plugin to disable JavaScript.
+Force to name files according to folder name.
 
 ## Installing
 
-`npm install eslint-plugin-no-js --save-dev`
+`npm install eslint-plugin-filenames-at-folder --save-dev`
 
 ## ESLint Rules
 
-### no-js
+### filenames-according-to-folder
 
-There's no reason to use JavaScript.
-
-### no-jsx
-
-JSX is for PHP-lovers. We don't need that!
+Name files correct.
 
 ## Sample Configuration File
 
@@ -23,11 +19,10 @@ Here's a sample ESLint configuration file that activates these rules:
 ```
 {
   "plugins": [
-    "no-js"
+    "filenames-at-folder"
   ],
   "rules": {
-    "no-js/no-js": 2,
-    "no-js/no-jsx": 2
+    "filenames-at-folder/filenames-according-to-folder": 2,
   }
 }
 ```
