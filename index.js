@@ -10,11 +10,18 @@ module.exports = {
           if (context.getFilename()) {
             context.report(node, `Your path is ${context.getFilename()}`);
           }
-          // if (path.extname(context.getFilename()) === '.js') {
-          //   context.report(node, `Your path is ${}`);
-          // }
         },
       };
     },
   },
+  processors: {
+    // assign to the file extension you want (.js, .jsx, .html, etc.)
+    ".styl": {
+      postprocess: function(messages, filename) {
+        if (filename) {
+          context.report(node, `Your path is ${filename}`);
+        }
+      },
+    }
+  }
 };
