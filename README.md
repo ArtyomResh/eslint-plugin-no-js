@@ -1,4 +1,4 @@
-# eslint-plugin-no-js
+# eslint-plugin-filenames-at-folder
 
 Force to name files according to folder name.
 
