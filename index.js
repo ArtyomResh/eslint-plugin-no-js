@@ -64,7 +64,7 @@ module.exports = {
                             &&
                             firstFolderInPath !== 'components'
                         ) {
-                            return context.report(node, `Files and folders should contain in their names component or route folder name: «${toPascalCase(folderName)}».\n Try to include it or reorganize your file structure`)
+                            return context.report(node, `Files and folders should contain in their names component name or route folder name: «${toPascalCase(folderName)}».\n Try to include it or reorganize your file structure`)
                         }
 
                         return checkFolderName(folderName, path.split('/').slice(1).join('/'));
