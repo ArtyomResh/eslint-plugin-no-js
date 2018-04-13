@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-filenames-at-folder",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Force to name files according to folder name.",
   "main": "index.js",
   "scripts": {
