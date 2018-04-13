@@ -8,7 +8,7 @@ module.exports = {
             return {
                 Program: function(node) {
 
-                    var filepath = context.getFilename()
+                    var filepath = context.getFilename();
                     /**
                         Используем posix для того что бы добиться консистентности
                         не зависимо от операционный систе и парсим путь к виду:
@@ -22,18 +22,18 @@ module.exports = {
                         }
                     **/
 
-                    var filepathData = path.posix.parse(filepath)
-                    var pathFolderNames = filepathData.dir.split('/')
+                    var filepathData = path.posix.parse(filepath);
+                    var pathFolderNames = filepathData.dir.split('/');
 
                     /** Получаем индексы и названия папок компонентов и роутов **/
-                    var componentFolderNameIndex = pathFolderNames.findIndex(function(path) { return path === 'components' }) + 1
-                    var routeFolderNameIndex = pathFolderNames.findIndex(function(path) { return path === 'routes' }) + 1
-                    var componentFolderName = pathFolderNames[componentFolderNameIndex]
-                    var routeFolderName = pathFolderNames[routeFolderNameIndex]
+                    var componentFolderNameIndex = pathFolderNames.findIndex(function(path) { return path === 'components' }) + 1;
+                    var routeFolderNameIndex = pathFolderNames.findIndex(function(path) { return path === 'routes' }) + 1;
+                    var componentFolderName = pathFolderNames[componentFolderNameIndex];
+                    var routeFolderName = pathFolderNames[routeFolderNameIndex];
 
                     /** Получаем пути от папок роутов и компонентов находящихся в них файлов **/
-                    var pathInComponentFolder = pathFolderNames.slice(componentFolderNameIndex).concat(filepathData.name).join('/')
-                    var pathInRouteFolder = pathFolderNames.slice(routeFolderNameIndex).concat(filepathData.name).join('/')
+                    var pathInComponentFolder = pathFolderNames.slice(componentFolderNameIndex).concat(filepathData.name).join('/');
+                    var pathInRouteFolder = pathFolderNames.slice(routeFolderNameIndex).concat(filepathData.name).join('/');
 
                     function toPascalCase(word) {
                         return word
@@ -54,7 +54,7 @@ module.exports = {
                         в нём названия родетельской папки
                     **/
                     function checkFolderName(folderName, path) {
-                        if (!path) return
+                        if (!path) return;
 
                         var firstFolderInPath = path.split('/')[0];
 
@@ -64,18 +64,36 @@ module.exports = {
                             &&
                             firstFolderInPath !== 'components'
                         ) {
-                            return context.report(node, `Files and folders should contain in their names component name or route folder name: «${toPascalCase(folderName)}».\n Try to include it or reorganize your file structure`)
+                            return context.report(node, `Files and folders should contain in their names component name or route folder name: «${toPascalCase(folderName)}».\n Try to include it or reorganize your file structure`);
                         }
 
                         return checkFolderName(folderName, path.split('/').slice(1).join('/'));
                     }
 
                     if (filepathData.dir.includes('app/components/') && filepathData.name !== 'index') {
-                        checkFolderName(componentFolderName, pathInComponentFolder)
+                        checkFolderName(componentFolderName, pathInComponentFolder);
                     }
 
                     if (filepathData.dir.includes('app/routes/') && filepathData.name !== 'index') {
-                        checkFolderName(routeFolderName, pathInRouteFolder)
+                        checkFolderName(routeFolderName, pathInRouteFolder);
+                    }
+                },
+            };
+        },
+        'filenames-to-pascal-case': function(context) {
+            return {
+                Program: function(node) {
+                    var filepath = context.getFilename();
+                    var filepathData = path.posix.parse(filepath);
+                    var ext = filepathData.ext;
+                    var dir = filepathData.dir;
+                    var name = filepathData.name;
+
+                    if (ext && name !== 'index' && name !== toPascalCase(name) && dir.includes('app/components/')
+                        ||
+                        ext && name !== 'index' && name !== toPascalCase(name) && dir.includes('app/routes/')
+                    ) {
+                        return context.report(node, 'Files should be named in PascalCase');
                     }
                 },
             };
